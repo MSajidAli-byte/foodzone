@@ -1,43 +1,35 @@
-# 🍔 FoodZone – Django Food-Ordering App
+Here's a modified version of your README that includes information about accessing the documentation for your website using MkDocs. I've added a section specifically for viewing the documentation and made minor adjustments for clarity.
 
+---
+
+# 🍔 FoodZone – Django Food-Ordering App
 A full-featured, **open-source** food-ordering web application built with **Django 4.2**.  
 Perfect for learning, cloning, or extending into your own restaurant or cloud-kitchen platform.
 
 ---
 
 ## 📸 Quick Visual Tour
-
 | Home Page | Menu Listing | Cart & Checkout |
 |-----------|--------------|-----------------|
 | ![Home](static/img/readme/home.png) | ![Menu](static/img/readme/all_dishes.png) | ![Checkout](static/img/readme/dish_1.png) |
-
-*(Screenshots are stored in `static/img/readme/` so the repo is 100 % self-contained and viewable offline.)*
+*(Screenshots are stored in `static/img/readme/` so the repo is 100% self-contained and viewable offline.)*
 
 ### 🔍 Full Walkthrough Screenshots
-
 Below are **full-page screenshots** of every major flow so visitors can see exactly how the site looks and works **without running the code**.
-
 1. **Home / Landing Page**  
    ![Home](static/img/readme/home.png)
-
 2. **Menu Listing (All Dishes)**  
    ![Menu](static/img/readme/all_dishes.png)
-
 3. **Dish Detail**  
    ![Dish](static/img/readme/dish_1.png)
-
 4. **Shopping Cart**  
    ![Cart](static/img/readme/dashboard_my_orders.png)
-
 5. **Checkout & Payment**  
    ![Checkout](static/img/readme/dish_1.png)
-
 6. **Payment Success**  
    ![Success](static/img/readme/payment-done.png)
-
 7. **User Dashboard**  
    ![Dashboard](static/img/readme/dashboard.png)
-
 8. **Admin Panel**  
    ![Admin](static/img/readme/admin.png)
 
@@ -46,7 +38,6 @@ Below are **full-page screenshots** of every major flow so visitors can see exac
 ---
 
 ## 🚀 Features
-
 - ✅ **User Registration / Login / Logout**  
 - ✅ **Category & Dish Management** (Admin panel)  
 - ✅ **Add-to-Cart & Real-time Total**  
@@ -59,7 +50,6 @@ Below are **full-page screenshots** of every major flow so visitors can see exac
 ---
 
 ## 🛠️ Tech Stack
-
 | Layer        | Technology |
 |--------------|------------|
 | Backend      | Django 4.2 |
@@ -72,7 +62,6 @@ Below are **full-page screenshots** of every major flow so visitors can see exac
 ---
 
 ## 📁 Project Structure (high-level)
-
 ```
 foodzone/
 ├── foodzone/          # Django settings & URLs
@@ -84,53 +73,38 @@ foodzone/
 └── README.md          # This file
 ```
 
-
 ## 🚀 Getting Started: 60-Second Local Setup
-
 **Prerequisites:**
 - Python 3.8+
 - Git
 
 **Installation & Run:**
-
 ```bash
 # 1. Clone the repository
 git clone https://github.com/<your-username>/foodzone.git
 cd foodzone
-
 # 2. Create a virtual environment and activate it
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-
 # 3. Install dependencies
 pip install -r requirements.txt
-
 # 4. Apply database migrations
 python manage.py migrate
-
 # 5. Create a superuser to access the admin panel
 python manage.py createsuperuser
-
 # 6. (Optional) Load initial demo data
 python manage.py loaddata initial_dishes.json
-
 # 7. Run the development server
 python manage.py runserver
 ```
-
 Your application will be available at **http://127.0.0.1:8000**.
 
-
 ## 🔐 Admin Panel
-
 - URL: http://127.0.0.1:8000/admin  
 - Use the superuser credentials you just created.
 
-
 ## 🔐 Environment Variables (Optional)
-
 Create a `.env` file in the project root:
-
 ```dotenv
 SECRET_KEY=your-secret-key
 DEBUG=True
@@ -144,17 +118,29 @@ JAZZCASH_INTEGERITY_SALT=...
 ---
 
 ## 🧪 Offline Preview (No Hosting Needed)
-
 Because all screenshots and static assets are committed, anyone can:
-
 1. Open the repo in **VS Code** or **GitHub Desktop**.
 2. Double-click any `.html` file inside `templates/` to see the layout.
 3. Browse `static/img/readme/` for full-page screenshots.
 
 ---
 
-## 🤝 Contributing
+## 📚 Viewing Documentation with MkDocs
+To view the documentation for the FoodZone application:
+1. Ensure you have MkDocs installed. If not, you can install it using pip:
+   ```bash
+   pip install mkdocs
+   ```
+2. Navigate to the documentation directory (where your `mkdocs.yml` file is located).
+3. Run the following command to start the MkDocs development server:
+   ```bash
+   mkdocs serve
+   ```
+4. Open your web browser and go to **http://127.0.0.1:8000** to view the documentation.
 
+---
+
+## 🤝 Contributing
 1. Fork the repo  
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)  
 3. Commit & push  
@@ -163,9 +149,12 @@ Because all screenshots and static assets are committed, anyone can:
 ---
 
 ## 📄 License
-
 MIT © [M. Sajid ALi](https://github.com/MSajidAli-byte/)
 
 ---
 
 > **No hosting fees required** – everything runs locally or can be containerized with Docker in minutes.
+
+---
+
+This revised README now includes a section for viewing the documentation using MkDocs, making it easier for users to access and understand how to view the project's documentation. If you have any further modifications or additional sections you'd like to add, feel free to let me know!
