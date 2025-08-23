@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% comment %} 
+<form id="jazzcashForm" method="post" action="{{ post_url }}">
+    {% for key, value in data.items %}
+    <input type="hidden" name="{{ key }}" value="{{ value }}">
+    {% endfor %}
+</form>
+<script>
+    document.getElementById('jazzcashForm').submit();
+</script>
+{% endcomment %}
+
+{% if dish.is_available %}
+{% if user.is_authenticated and not user.is_staff %}
+<form method="post" action="{% url 'buy_dish' id=dish.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Buy Now</button>
+</form>
+{% elif not user.is_authenticated %}
+<p><a href="{% url 'login' %}">Login to Buy</a></p>
+{% endif %}
+{% else %}
+<p class="text-danger">Not Available for delivery!</p>
+{% endif %}
+
+{% endblock %}

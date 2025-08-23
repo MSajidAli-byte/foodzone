@@ -1,0 +1,52 @@
+[
+  {
+    "model": "foodapp.category",
+    "pk": 1,
+    "fields": {
+      "name": "Burgers"
+    }
+  },
+  {
+    "model": "foodapp.category",
+    "pk": 2,
+    "fields": {
+      "name": "Snacks"
+    }
+  },
+  {
+    "model": "foodapp.category",
+    "pk": 3,
+    "fields": {
+      "name": "Beverages"
+    }
+  },
+
+  {
+    "model": "foodapp.dish",
+    "pk": 1,
+    "fields": {
+      "name": "Mini cheese Burger",
+      "image": "dishes/menu-burger.jpg",
+      "ingredients": "Cheese, bun, patty",
+      "details": "Lorem ipsum dolor sit amet elit. Phasel nec preti facil",
+      "category": 1,
+      "price": 9.00,
+      "discounted_price": null,
+      "is_available": true
+    }
+  },
+  {
+    "model": "foodapp.dish",
+    "pk": 2,
+    "fields": {
+      "name": "Double size Burger",
+      "image": "dishes/menu-burger.jpg",
+      "ingredients": "Double patty, cheese, bun",
+      "details": "Lorem ipsum dolor sit amet elit. Phasel nec preti facil",
+      "category": 1,
+      "price": 11.00,
+      "discounted_price": null,
+      "is_available": true
+    }
+  }
+]
