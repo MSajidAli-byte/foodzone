@@ -83,6 +83,8 @@ For documentation granularity, you may include tab-specific screenshots:
 - Edit Profile: ![Edit Profile](img/dashboard_edit_profile.png)
 - Change Password: ![Change Password](img/dashboard_change_pass.png)
 - My Orders: ![My Orders](img/dashboard_my_orders.png)
+- My Orders: ![My Orders](img/dashboard_my_orders_modal form.png)
+- My Orders: ![My Orders](img/dashboard_my_orders_cleared entry.png)
 
 ## Tips
 

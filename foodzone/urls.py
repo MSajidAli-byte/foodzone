@@ -23,6 +23,8 @@ urlpatterns = [
     # path('process-jazzcash-payment/<int:order_id>/', views.process_jazzcash_payment, name='process_jazzcash_payment'),
     # path('buy-dish/<int:id>/', views.buy_dish, name='buy_dish'),
     path('dish/<int:id>/buy/', views.buy_dish, name='buy_dish'),
+    path('clear_order/<int:order_id>/clear/', views.clear_order, name='clear_order'),
+
 
     # Paypal URLs
     path('paypal/', include('paypal.standard.ipn.urls')),

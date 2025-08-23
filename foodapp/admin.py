@@ -3,6 +3,7 @@ from django.contrib import admin
 from foodapp import models
 
 # Register your models here.
+admin.site.site_header = "FoodZone Admin"
 
 class FoodZoneAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'subject', 'created_at', 'is_approved')

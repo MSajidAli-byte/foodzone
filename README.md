@@ -9,7 +9,7 @@ Perfect for learning, cloning, or extending into your own restaurant or cloud-ki
 
 | Home Page | Menu Listing | Cart & Checkout |
 |-----------|--------------|-----------------|
-| ![Home](static/img/readme/home.png) | ![Menu](static/img/readme/menu.png) | ![Checkout](static/img/readme/checkout.png) |
+| ![Home](static/img/readme/home.png) | ![Menu](static/img/readme/all_dishes.png) | ![Checkout](static/img/readme/dish_1.png) |
 
 *(Screenshots are stored in `static/img/readme/` so the repo is 100 % self-contained and viewable offline.)*
 
@@ -21,19 +21,19 @@ Below are **full-page screenshots** of every major flow so visitors can see exac
    ![Home](static/img/readme/home.png)
 
 2. **Menu Listing (All Dishes)**  
-   ![Menu](static/img/readme/menu.png)
+   ![Menu](static/img/readme/all_dishes.png)
 
 3. **Dish Detail**  
-   ![Dish](static/img/readme/dish.png)
+   ![Dish](static/img/readme/dish_1.png)
 
 4. **Shopping Cart**  
-   ![Cart](static/img/readme/cart.png)
+   ![Cart](static/img/readme/dashboard_my_orders.png)
 
 5. **Checkout & Payment**  
-   ![Checkout](static/img/readme/checkout.png)
+   ![Checkout](static/img/readme/dish_1.png)
 
 6. **Payment Success**  
-   ![Success](static/img/readme/success.png)
+   ![Success](static/img/readme/payment-done.png)
 
 7. **User Dashboard**  
    ![Dashboard](static/img/readme/dashboard.png)

@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-kjoi2=7udq2(zx77-r=g1(cgtv6vs&+tq2l^5lo1m8nc(wet#%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'foodapp',
+    'django_bootstrap5',
     'paypal.standard.ipn',
 ]
 

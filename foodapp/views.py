@@ -335,3 +335,16 @@ def buy_dish(request, id):
     order.save()
     request.session['order_id'] = order.id
     return redirect('process_jazzcash_payment', order_id=order.id)
+
+@login_required
+def clear_order(request, order_id):
+    
+    if request.method == "POST":
+        order = get_object_or_404(Order, id=order_id, customer__user=request.user)
+        
+        # Store the invoice id before deleting for showing message
+        invoice_id = order.invoice_id
+        
+        order.delete()
+        messages.success(request, f"Order {invoice_id} has been cleared.")
+    return redirect('dashboard')
