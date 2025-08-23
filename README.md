@@ -164,7 +164,7 @@ Because all screenshots and static assets are committed, anyone can:
 
 ## 📄 License
 
-MIT © [Your Name](https://github.com/<your-username>)
+MIT © [M. Sajid ALi](https://github.com/MSajidAli-byte/)
 
 ---
 
