@@ -1,160 +1,232 @@
-Here's a modified version of your README that includes information about accessing the documentation for your website using MkDocs. I've added a section specifically for viewing the documentation and made minor adjustments for clarity.
+# FoodZone
 
----
+A Django-based food ordering website with user registration, profile management, catalog of categories and dishes, ordering, and payment integration. The project ships with a responsive Bootstrap UI and an admin backend for content management.
 
-# 🍔 FoodZone – Django Food-Ordering App
-A full-featured, **open-source** food-ordering web application built with **Django 4.2**.  
-Perfect for learning, cloning, or extending into your own restaurant or cloud-kitchen platform.
 
----
+## Highlights (Latest Changes)
 
-## 📸 Quick Visual Tour
-| Home Page | Menu Listing | Cart & Checkout |
-|-----------|--------------|-----------------|
-| ![Home](static/img/readme/home.png) | ![Menu](static/img/readme/all_dishes.png) | ![Checkout](static/img/readme/dish_1.png) |
-*(Screenshots are stored in `static/img/readme/` so the repo is 100% self-contained and viewable offline.)*
+- Payments: Implemented JazzCash HMAC payment flow (sandbox) while keeping PayPal IPN endpoints available. The classic PayPal form flow in `views.single_dish` is commented for reference and replaced by JazzCash.
+- Orders: Order status handling (Successful/Failed/Pending) with clearer states. Ability to clear an order from the dashboard using a secure POST + confirmation modal.
+- Dashboard: Profile editing (name, contact, address, profile picture), and password change flow. Improved messaging via Django messages framework.
+- Models: Additional timestamps (`updated_on`) for Category and Dish; `Profile.profile_picture` field.
+- Settings: Timezone set to `Asia/Karachi`, media storage configured, `django_bootstrap5` and `paypal.standard.ipn` added, keys for JazzCash/PayPal (use env variables for production).
+- Dependencies updated and pinned in `requirements.txt` (Django 5.2.x, Pillow 11.x, etc.).
 
-### 🔍 Full Walkthrough Screenshots
-Below are **full-page screenshots** of every major flow so visitors can see exactly how the site looks and works **without running the code**.
-1. **Home / Landing Page**  
-   ![Home](static/img/readme/home.png)
-2. **Menu Listing (All Dishes)**  
-   ![Menu](static/img/readme/all_dishes.png)
-3. **Dish Detail**  
-   ![Dish](static/img/readme/dish_1.png)
-4. **Shopping Cart**  
-   ![Cart](static/img/readme/dashboard_my_orders.png)
-5. **Checkout & Payment**  
-   ![Checkout](static/img/readme/dish_1.png)
-6. **Payment Success**  
-   ![Success](static/img/readme/payment-done.png)
-7. **User Dashboard**  
-   ![Dashboard](static/img/readme/dashboard.png)
-8. **Admin Panel**  
-   ![Admin](static/img/readme/admin.png)
 
-> **Zero-hosting preview**: All images are committed to the repo, so GitHub renders them instantly—no server or cost required.
+## Tech Stack
 
----
+- Backend: Django 5.x
+- Frontend: Bootstrap 5, jQuery
+- Database: SQLite (default) — can be swapped for Postgres/MySQL
+- Payments: JazzCash (Sandbox), PayPal IPN wiring available
+- Media: Local filesystem (`MEDIA_ROOT`)
 
-## 🚀 Features
-- ✅ **User Registration / Login / Logout**  
-- ✅ **Category & Dish Management** (Admin panel)  
-- ✅ **Add-to-Cart & Real-time Total**  
-- ✅ **JazzCash & Stripe Payment Gateways**  
-- ✅ **Order History & Status Tracking**  
-- ✅ **Responsive UI** (Bootstrap 5)  
-- ✅ **Admin Dashboard** for CRUD operations  
-- ✅ **Static Screenshots** for offline preview
 
----
+## Project Structure
 
-## 🛠️ Tech Stack
-| Layer        | Technology |
-|--------------|------------|
-| Backend      | Django 4.2 |
-| Database     | SQLite (default) |
-| Frontend     | HTML5, Bootstrap 5, JavaScript |
-| Payments     | Stripe & JazzCash |
-| Icons        | Material Icons |
-| Static Files | WhiteNoise (ready for Heroku/Render if needed) |
+- foodzone/foodzone/settings.py — base settings, static & media config, payment config
+- foodzone/foodzone/urls.py — URL routing
+- foodzone/foodapp/models.py — Contact, Profile, Category, Dish, Order
+- foodzone/foodapp/views.py — public pages, auth, dashboard, payments (JazzCash)
+- foodzone/foodapp/admin.py — model registrations and admin tweaks
+- foodzone/template/*.html — templates (base, dashboard, etc.)
+- requirements.txt — pinned dependencies
+- docs/ — additional markdown docs (example: dashboard.md)
 
----
 
-## 📁 Project Structure (high-level)
+## Features
+
+- Public pages: Home, About, Feature, Team, Menu, Contact
+- Auth: Register, Login, Logout
+- User Dashboard: profile view/edit, password change, order history, clear orders
+- Catalog: Categories and Dishes with images, ingredients, price/discount
+- Payments: JazzCash sandbox checkout from dish page; PayPal IPN endpoints present
+- Admin: Manage Contacts, Profiles, Categories, Dishes, Orders
+
+
+## Screenshots
+
+- Home
+  ![Home](docs/img/home.png)
+- About
+  ![About](docs/img/about.png)
+- Features
+  ![Feature](docs/img/feature.png)
+- Register / Login
+  ![Register](docs/img/register.png)
+  ![Login](docs/img/login.png)
+- All Dishes and Dish Detail
+  ![All Dishes](docs/img/all_dishes.png)
+  ![Dish](docs/img/dish_1.png)
+- Dashboard (Overview, Edit Profile, Change Password)
+  ![Dashboard](docs/img/dashboard.png)
+  ![Edit Profile](docs/img/dashboard_edit_profile.png)
+  ![Change Password](docs/img/dashboard_change_pass.png)
+- Orders (List, Confirmation Modal, Cleared Entry)
+  ![Orders](docs/img/dashboard_my_orders.png)
+  ![Orders Modal](docs/img/dashboard_my_orders_modal%20form.png)
+  ![Orders Cleared](docs/img/dashboard_my_orders_cleared%20entry.png)
+- Contact Us
+  ![Contact Us](docs/img/contact_us.png)
+
+More screenshots are available under docs/img/ and corresponding docs/*.md pages.
+
+
+## Routes
+
+From `foodzone/urls.py`:
+- / — Home
+- /about/ — About page
+- /contact/ — Contact form (persists to Contact model)
+- /register/ — Registration
+- /login/ — Sign in
+- /logout/ — Sign out
+- /dashboard/ — Authenticated user dashboard
+- /dishes/ — All dishes with optional filter by category (?q=<category_id>)
+- /dish/<id>/ — Dish detail + create order and prepare payment (POST)
+- /dish/<id>/buy/ — Create an order (POST-only) then redirect to payment flow
+- /clear_order/<order_id>/clear/ — Clear an order (POST-only)
+- /paypal/ — django-paypal IPN endpoints
+- /payment-done/ — Payment success handler
+- /payment-cancelled/ — Payment cancel/failure handler
+
+Note: Admin is available at /admin/
+
+
+## Models Overview
+
+- Contact: name, email, subject, message, created_at, is_approved
+- Profile: user (OneToOne), profile_picture, contact, address, updated_on
+- Category: name (unique), image, icon, description, added_on, updated_on
+- Dish: name (unique), image, ingredients, details, category (FK), price, discounted_price, is_available, added_on, updated_on
+- Order: customer (Profile FK), item (Dish FK), status (bool), invoice_id, payer_id, ordered_on
+
+
+## Requirements
+
+See requirements.txt for exact versions. Core:
+- Django==5.2.5
+- django-bootstrap5==25.2
+- django-paypal==2.1
+- Pillow==11.3.0
+
+Dev/docs tooling present: mkdocs, mkdocs-material, etc. (optional)
+
+Python: 3.10+ recommended (project tested with modern Python versions). On Windows, use a venv.
+
+
+## Configuration
+
+For development, the project includes example values in settings.py. For production, configure with environment variables and do not commit secrets.
+
+Suggested .env (example):
+
 ```
-foodzone/
-├── foodzone/          # Django settings & URLs
-├── foodapp/           # Core business logic & models
-├── media/             # User uploads (dishes, profiles)
-├── static/            # CSS, JS, images
-├── templates/         # HTML templates
-├── requirements.txt   # Exact dependency versions
-└── README.md          # This file
+DJANGO_SECRET_KEY=your-strong-secret-key
+DJANGO_DEBUG=False
+DJANGO_ALLOWED_HOSTS=yourdomain.com,localhost
+
+# PayPal
+PAYPAL_RECEIVER_EMAIL=your-paypal-merchant@example.com
+PAYPAL_TEST=True
+
+# JazzCash (Sandbox/Test)
+JAZZCASH_MERCHANT_ID=MCxxxxxxxx
+JAZZCASH_PASSWORD=********
+JAZZCASH_INTEGRITY_SALT=********
+JAZZCASH_RETURN_URL=https://yourdomain.com/payment-done/
+JAZZCASH_CANCEL_URL=https://yourdomain.com/payment-cancelled/
+JAZZCASH_POST_URL=https://sandbox.jazzcash.com.pk/CustomerPortal/transactionmanagement/merchantform/
 ```
 
-## 🚀 Getting Started: 60-Second Local Setup
-**Prerequisites:**
-- Python 3.8+
-- Git
+Then load them in settings.py (consider python-dotenv or os.environ) and remove hardcoded values.
 
-**Installation & Run:**
-```bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/foodzone.git
-cd foodzone
-# 2. Create a virtual environment and activate it
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-# 3. Install dependencies
+Media:
+- MEDIA_URL=/media/
+- MEDIA_ROOT=<project_root>/media
+
+Static:
+- STATIC_URL=/static/
+- STATICFILES_DIRS=[<project_root>/static]
+
+
+## Getting Started (Local Development)
+
+1) Clone and create virtual environment
+
+- Windows (PowerShell):
+```
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+2) Install dependencies
+```
+pip install --upgrade pip
 pip install -r requirements.txt
-# 4. Apply database migrations
+```
+
+3) Apply migrations and create a superuser
+```
 python manage.py migrate
-# 5. Create a superuser to access the admin panel
 python manage.py createsuperuser
-# 6. (Optional) Load initial demo data
-python manage.py loaddata initial_dishes.json
-# 7. Run the development server
+```
+
+4) Run the development server
+```
 python manage.py runserver
 ```
-Your application will be available at **http://127.0.0.1:8000**.
 
-## 🔐 Admin Panel
-- URL: http://127.0.0.1:8000/admin  
-- Use the superuser credentials you just created.
+Visit http://127.0.0.1:8000 and http://127.0.0.1:8000/admin
 
-## 🔐 Environment Variables (Optional)
-Create a `.env` file in the project root:
-```dotenv
-SECRET_KEY=your-secret-key
-DEBUG=True
-STRIPE_PUBLISHABLE_KEY=pk_test_...
-STRIPE_SECRET_KEY=sk_test_... # Note: Keep this secret!
-JAZZCASH_MERCHANT_ID=...
-JAZZCASH_PASSWORD=...
-JAZZCASH_INTEGERITY_SALT=...
+5) Add content
+- Log in to /admin to create Categories and Dishes (ensure images exist)
+- Register as a user and update your profile in /dashboard/
+
+
+## Payment Flow (JazzCash)
+
+- On a Dish detail page (`/dish/<id>/`), submit a POST to create an Order and prepare JazzCash parameters.
+- The server computes the HMAC SHA-256 `pp_SecureHash` using `JAZZCASH_INTEGRITY_SALT` over ordered fields.
+- The template posts to the JazzCash sandbox endpoint; user completes payment.
+- JazzCash returns to `payment_done` on success or `payment_cancel` on failure/cancel.
+
+Note:
+- Current success handler trusts POST presence of `pp_ResponseCode` and tries to match `invoice_id` to update Order status.
+- For GET fallbacks, `payment_done` will mark pending orders as successful (intended for sandbox; do not use this in production). For production, implement proper IPN/verification and remove GET-based success.
+
+
+## Admin Configuration
+
+- Admin header is customized to "FoodZone Admin".
+- Contact model shows basic list fields.
+- Manage all content: Contact, Profile, Category, Dish, Order.
+
+
+## Security and Production Notes
+
+- Never commit real payment keys or the Django SECRET_KEY. Use environment variables.
+- Set `DEBUG=False` and populate `ALLOWED_HOSTS` in production.
+- Serve static and media via a proper web server/CDN. Run `python manage.py collectstatic` and configure STATIC_ROOT.
+- Use HTTPS and secure cookies/settings.
+- Replace the GET fallback in `payment_done` with verified callbacks and/or a polling mechanism.
+
+
+## Troubleshooting
+
+- Media not showing: Ensure MEDIA_URL/MEDIA_ROOT are configured and that you include `urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)` in DEBUG.
+- Payment keys invalid: Use JazzCash sandbox credentials and ensure the HMAC "ordered keys" match the provider documentation.
+- Login after password change: The code re-logs the user; if sessions expire, prompt for login again.
+
+
+## Documentation
+
+- See docs/dashboard.md for additional UI notes. If you want a full site, add an `mkdocs.yml` and run:
+```
+mkdocs serve
 ```
 
----
 
-## 🧪 Offline Preview (No Hosting Needed)
-Because all screenshots and static assets are committed, anyone can:
-1. Open the repo in **VS Code** or **GitHub Desktop**.
-2. Double-click any `.html` file inside `templates/` to see the layout.
-3. Browse `static/img/readme/` for full-page screenshots.
+## License
 
----
-
-## 📚 Viewing Documentation with MkDocs
-To view the documentation for the FoodZone application:
-1. Ensure you have MkDocs installed. If not, you can install it using pip:
-   ```bash
-   pip install mkdocs
-   ```
-2. Navigate to the documentation directory (where your `mkdocs.yml` file is located).
-3. Run the following command to start the MkDocs development server:
-   ```bash
-   mkdocs serve
-   ```
-4. Open your web browser and go to **http://127.0.0.1:8000** to view the documentation.
-
----
-
-## 🤝 Contributing
-1. Fork the repo  
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)  
-3. Commit & push  
-4. Open a Pull Request
-
----
-
-## 📄 License
-MIT © [M. Sajid ALi](https://github.com/MSajidAli-byte/)
-
----
-
-> **No hosting fees required** – everything runs locally or can be containerized with Docker in minutes.
-
----
-
-This revised README now includes a section for viewing the documentation using MkDocs, making it easier for users to access and understand how to view the project's documentation. If you have any further modifications or additional sections you'd like to add, feel free to let me know!
+This project is provided for educational purposes. Add your preferred license (e.g., MIT) here.
